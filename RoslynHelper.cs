@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.IO;
@@ -26,8 +26,9 @@ namespace csharp2json
             var system = Syntax.IdentifierName("System");
             var systemCollections = Syntax.QualifiedName(system, Syntax.IdentifierName("Collections"));
             var systemCollectionsGeneric = Syntax.QualifiedName(systemCollections, Syntax.IdentifierName("Generic"));
-            var systemText = Syntax.QualifiedName(system, Syntax.IdentifierName("Text"));
             var systemLinq = Syntax.QualifiedName(system, Syntax.IdentifierName("Linq"));
+            var systemText = Syntax.QualifiedName(system, Syntax.IdentifierName("Text"));            
+            var systemXml = Syntax.QualifiedName(system, Syntax.IdentifierName("Xml"));
 
             var declaredUsings = root.Usings.Select(x => x.Name.ToString()).ToList();
             if (!declaredUsings.Contains("System"))
@@ -42,13 +43,17 @@ namespace csharp2json
             {
                 root = root.AddUsings(Syntax.UsingDirective(systemCollectionsGeneric).NormalizeWhitespace());
             }
-            if (!declaredUsings.Contains("System.Text"))
-            {
-                root = root.AddUsings(Syntax.UsingDirective(systemLinq).NormalizeWhitespace());
-            }
             if (!declaredUsings.Contains("System.Linq"))
             {
                 root = root.AddUsings(Syntax.UsingDirective(systemText).NormalizeWhitespace());
+            }
+            if (!declaredUsings.Contains("System.Text"))
+            {
+                root = root.AddUsings(Syntax.UsingDirective(systemLinq).NormalizeWhitespace());
+            }            
+            if (!declaredUsings.Contains("System.Xml"))
+            {
+               root = root.AddUsings(Syntax.UsingDirective(systemXml).NormalizeWhitespace());
             }
 
             tree = SyntaxTree.Create(root);
