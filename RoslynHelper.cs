@@ -19,6 +19,11 @@ namespace csharp2json
         /// <returns>Collection of object instances</returns>
         public static IEnumerable<object> CompileClasses(string csharp)
         {
+            if (string.IsNullOrEmpty(csharp))
+            {
+                throw new ArgumentNullException(nameof(csharp));
+            }
+
             SyntaxTree tree = SyntaxTree.ParseText(csharp);
             CompilationUnitSyntax root = tree.GetRoot();
         
