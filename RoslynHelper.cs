@@ -50,11 +50,11 @@ namespace csharp2json
             }
             if (!declaredUsings.Contains("System.Linq"))
             {
-                root = root.AddUsings(Syntax.UsingDirective(systemText).NormalizeWhitespace());
+                root = root.AddUsings(Syntax.UsingDirective(systemLinq).NormalizeWhitespace());
             }
             if (!declaredUsings.Contains("System.Text"))
             {
-                root = root.AddUsings(Syntax.UsingDirective(systemLinq).NormalizeWhitespace());
+                root = root.AddUsings(Syntax.UsingDirective(systemText).NormalizeWhitespace());
             }            
             if (!declaredUsings.Contains("System.Xml"))
             {
